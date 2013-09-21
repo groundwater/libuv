@@ -1478,7 +1478,14 @@ enum uv_process_flags {
    * option is only meaningful on Windows systems. On unix it is silently
    * ignored.
    */
-  UV_PROCESS_WINDOWS_HIDE = (1 << 4)
+  UV_PROCESS_WINDOWS_HIDE = (1 << 4),
+  /*
+   * Spawn a child process in a new process group - this will make the process
+   * a group leader, but the process will remain in the same session as the
+   * parent. This behaviour is required for shell processes that wish to 
+   * use job-control, and have their children share the attached TTY.
+   */
+  UV_PROCESS_SETPGID = (1 << 5)    
 };
 
 /*

@@ -280,6 +280,9 @@ static void uv__process_child_init(const uv_process_options_t* options,
 
   if (options->flags & UV_PROCESS_DETACHED)
     setsid();
+  
+  if (options->flags & UV_PROCESS_SETPGID)
+    setpgid(0,0);
 
   for (fd = 0; fd < stdio_count; fd++) {
     close_fd = pipes[fd][0];
